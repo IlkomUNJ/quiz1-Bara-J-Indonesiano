@@ -1,4 +1,7 @@
 #include <iostream>
+#include <string>
+#include <vector>
+#include "bank_customer.cpp"
 #include "bank_customer.h"
 #include "buyer.h"
 
@@ -44,13 +47,20 @@ int main() {
                                 cout << "Account Status: Buyer." << endl;
                             case UPGRADE_ACCOUNT:
                                 cout << "Upgrade to Seller Account." << endl;
-                                int x;
+                                string id;
                                 cout << "Enter Seller ID!";
                                 cin >> x;
-                                cout << "Your ID is registered as:" << x:
+                                cout << "Your ID is registered as:" << id;
                                 return 0;
                             case CREATE_BANK:
                                 cout << "Create Banking Account." << endl;
+                                case CREATE_BANK:
+                                    if (!bankAccount.isCreated) {
+                                        bankAccount.createAccount();
+                                    }
+                                    bankAccount.showMenu();
+                                    break;
+
                             case BROWSE:
                                 cout << "Store Browse." << endl;
                             case BACK:
