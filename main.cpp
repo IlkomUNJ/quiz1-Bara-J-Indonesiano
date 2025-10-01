@@ -20,6 +20,53 @@ int main() {
         switch (prompt) {
             case LOGIN:
                 cout << "Login selected." << endl;
+                cout << "User Registered as Buyer." << endl;
+
+                RegisterPrompt regPrompt = ACCOUNT_STATUS:
+                while (regPrompt != BACK){
+                    cout << "Select an option." << endl;
+                    cout << "1. Check Account Status." << endl;
+                    cout << "2. Upgrade To Seller Account." << endl;
+                    cout << "3. Create Banking Account." << endl;
+                    cout << "4. Browse Store." << endl;
+                    cout << "5. Log Out." << endl;
+                        
+                    int regChoice;
+                    cin >> regChoice
+                    if (regChoice < 1 || regChoice > 5) {
+                        cout << "Invalid Option" << endl;
+                        continue;
+                    }
+
+                    regPrompt = static_cast<RegisterPrompt>(regChoice - 1);
+                    switch (regPrompt) {
+                            case ACCOUNT_STATUS:
+                                cout << "Account Status: Buyer." << endl;
+                            case UPGRADE_ACCOUNT:
+                                cout << "Upgrade to Seller Account." << endl;
+                                int x;
+                                cout << "Enter Seller ID!";
+                                cin >> x;
+                                cout << "Your ID is registered as:" << x:
+                                return 0;
+                            case CREATE_BANK:
+                                cout << "Create Banking Account." << endl;
+                            case BROWSE:
+                                cout << "Store Browse." << endl;
+                            case BACK:
+                                cout << "Logging out." << endl;
+                                break;
+                            default:
+                                cout << "Invalid option." << endl;
+                        }
+
+                        
+                }
+        }
+
+
+                    }
+                   
                 /* if Login is selected, based on authority then provide options:
                 assume user is logged in as Buyer for now
                 1. Chek Account Status (will display if user is Buyer or Seller or both and linked banking account status)
@@ -72,6 +119,30 @@ int main() {
                 **/
                 break;
             case REGISTER:
+                regPrompt = CREATE_BUYER; // reset regPrompt to CREATE_BUYER when entering register menu
+                while (regPrompt != BACK){
+                    cout << "Register selected. " << endl;
+                    cout << "Select an option: " << endl;
+                    cout << "1. Create Buyer Account" << endl;
+                    cout << "2. Create Seller Account" << endl;
+                    cout << "3. Back" << endl;
+                    int regChoice;
+                    cin >> regChoice;
+                    regPrompt = static_cast<RegisterPrompt>(regChoice - 1);
+                    switch (regPrompt) {
+                        case CREATE_BUYER:
+                            cout << "Create Buyer Account selected." << endl;
+                        case CREATE_SELLER:
+                            cout << "Create Seller Account selected." << endl;
+                        case BACK:
+                            cout << "Back selected." << endl;
+                            break;
+                        default:
+                            cout << "Invalid option." << endl;
+                            break;
+                    }
+                }
+            enum Registerprompt
                 cout << "Register selected." << endl;
                 /* if register is selected then went throuhh registration process:
                 1. Create a new Buyer Account
@@ -80,6 +151,7 @@ int main() {
                 Must provides: Store Name, Store Address, Store Phone number, Store Email
                 After finished immediately logged in as Buyer/Seller
                 */
+
                 break;
             case EXIT:
                 cout << "Exiting." << std::endl;
