@@ -1,8 +1,20 @@
 #include <iostream>
+#include <string>
+#include <vector>
+#include "bank_customer.cpp"
 #include "bank_customer.h"
 #include "buyer.h"
 
-enum PrimaryPrompt{LOGIN, REGISTER, EXIT};
+enum PrimaryPrompt { LOGIN, REGISTER, EXIT };
+enum RegisterPrompt {
+    ACCOUNT_STATUS,
+    UPGRADE_ACCOUNT,
+    CREATE_BANK,
+    BROWSE,
+    BACK,
+    CREATE_BUYER,
+    CREATE_SELLER
+};
 
 using namespace std;
 
@@ -20,6 +32,57 @@ int main() {
         switch (prompt) {
             case LOGIN:
                 cout << "Login selected." << endl;
+                cout << "User Registered as Buyer." << endl;
+
+                RegisterPrompt regPrompt = ACCOUNT_STATUS;  // FIXED ':' to ';'
+                while (regPrompt != BACK) {
+                    cout << "Select an option." << endl;
+                    cout << "1. Check Account Status." << endl;
+                    cout << "2. Upgrade To Seller Account." << endl;
+                    cout << "3. Create Banking Account." << endl;
+                    cout << "4. Browse Store." << endl;
+                    cout << "5. Log Out." << endl;
+
+                    int regChoice;
+                    cin >> regChoice;
+                    if (regChoice < 1 || regChoice > 5) {
+                        cout << "Invalid Option" << endl;
+                        continue;
+                    }
+
+                    regPrompt = static_cast<RegisterPrompt>(regChoice - 1);
+                    switch (regPrompt) {
+                        case ACCOUNT_STATUS:
+                            cout << "Account Status: Buyer." << endl;
+                            break;  // FIXED: added missing break
+                        case UPGRADE_ACCOUNT: {
+                            cout << "Upgrade to Seller Account." << endl;
+                            string id;
+                            cout << "Enter Seller ID!";
+                            cin >> id;
+                            cout << "Your ID is registered as:" << id << endl;
+                            return 0;
+                        }
+                        case CREATE_BANK:
+                            cout << "Create Banking Account." << endl;
+                            if (!bankAccount.isCreated) {
+                                bankAccount.createAccount();
+                            }
+                            bankAccount.showMenu();
+                            break;
+
+                        case BROWSE:
+                            cout << "Store Browse." << endl;
+                            break;
+
+                        case BACK:
+                            cout << "Logging out." << endl;
+                            break;
+
+                        default:
+                            cout << "Invalid option." << endl;
+                            break;
+                    }
                 /* if Login is selected, based on authority then provide options:
                 assume user is logged in as Buyer for now
                 1. Chek Account Status (will display if user is Buyer or Seller or both and linked banking account status)
@@ -59,6 +122,7 @@ int main() {
                 Display confirmation dialogue
                 If confirmed, delete account and return to main menu
                 If not, return to Buyer menu
+
                 assume user is logged in as Seller for now
                 9. Check Inventory
                 10. Add Item to Inventory
@@ -70,17 +134,48 @@ int main() {
                 9. Exit to main Menu
                 10. Exit Program
                 **/
-                break;
-            case REGISTER:
-                cout << "Register selected." << endl;
+
+                
+                }
+                break;  // FIXED: missing break for LOGIN
+            case REGISTER: {
+                RegisterPrompt regPrompt = CREATE_BUYER; // reset regPrompt to CREATE_BUYER when entering register menu
+                while (regPrompt != BACK) {
+                    cout << "Register selected. " << endl;
+                    cout << "Select an option: " << endl;
+                    cout << "1. Create Buyer Account" << endl;
+                    cout << "2. Create Seller Account" << endl;
+                    cout << "3. Back" << endl;
+                    int regChoice;
+                    cin >> regChoice;
+                    regPrompt = static_cast<RegisterPrompt>(regChoice - 1);
+                    switch (regPrompt) {
+                        case CREATE_BUYER:
+                            cout << "Create Buyer Account selected." << endl;
+                            break;  // FIXED: missing break
+                        case CREATE_SELLER:
+                            cout << "Create Seller Account selected." << endl;
+                            break;
+                        case BACK:
+                            cout << "Back selected." << endl;
+                            break;
+                        default:
+                            cout << "Invalid option." << endl;
+                            break;
+                    }
+                }
                 /* if register is selected then went throuhh registration process:
                 1. Create a new Buyer Account
                 Must provides: Name, Home Address, Phone number, Email
                 2. Option to create a Seller Account (will be linked to Buyer account)
-                Must provides: Store Name, Store Address, Store Phone number, Store Email
+                Must Provides 1: Home Address, Phone number, Email
+                Must provides 2: Store Name, Store Address, Store Phone number, Store Email
+                Must provides 3: initial deposit amount
                 After finished immediately logged in as Buyer/Seller
                 */
+                cout << "Register selected." << endl;
                 break;
+            }
             case EXIT:
                 cout << "Exiting." << std::endl;
                 break;
